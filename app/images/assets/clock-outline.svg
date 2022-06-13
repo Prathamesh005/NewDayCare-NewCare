@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+  <g id="MDI_clock-outline" data-name="MDI / clock-outline" opacity="0.4">
+    <g id="Boundary" stroke="rgba(0,0,0,0)" stroke-width="1" opacity="0">
+      <rect width="28" height="28" stroke="none"/>
+      <rect x="0.5" y="0.5" width="27" height="27" fill="none"/>
+    </g>
+    <path id="Path_clock-outline" data-name="Path / clock-outline" d="M13.667,23a9.333,9.333,0,1,0-9.333-9.333A9.333,9.333,0,0,0,13.667,23m0-21A11.667,11.667,0,1,1,2,13.667,11.667,11.667,0,0,1,13.667,2m.583,5.833v6.125l5.25,3.115-.875,1.435L12.5,14.833v-7Z" transform="translate(0.333 0.333)"/>
+  </g>
+</svg>

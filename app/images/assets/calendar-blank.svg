@@ -1,0 +1,7 @@
+<svg id="MDI_calendar-blank" data-name="MDI / calendar-blank" xmlns="http://www.w3.org/2000/svg" width="24.926" height="24.926" viewBox="0 0 24.926 24.926">
+  <g id="Boundary" fill="#f39" stroke="rgba(0,0,0,0)" stroke-width="1" opacity="0">
+    <rect width="24.926" height="24.926" stroke="none"/>
+    <rect x="0.5" y="0.5" width="23.926" height="23.926" fill="none"/>
+  </g>
+  <path id="Path_calendar-blank" data-name="Path / calendar-blank" d="M19.617,19.694H5.077V8.27h14.54M16.5,1V3.077H8.193V1H6.116V3.077H5.077A2.07,2.07,0,0,0,3,5.154v14.54a2.077,2.077,0,0,0,2.077,2.077h14.54a2.077,2.077,0,0,0,2.077-2.077V5.154a2.077,2.077,0,0,0-2.077-2.077H18.579V1" transform="translate(0.116 1.077)" fill="#f39"/>
+</svg>

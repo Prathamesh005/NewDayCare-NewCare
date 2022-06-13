@@ -1,0 +1,7 @@
+<svg id="MDI_delete-empty-outline" data-name="MDI / delete-empty-outline" xmlns="http://www.w3.org/2000/svg" width="76.877" height="76.877" viewBox="0 0 76.877 76.877">
+  <g id="Boundary" fill="#f39" stroke="rgba(0,0,0,0)" stroke-width="1" opacity="0">
+    <rect width="76.877" height="76.877" stroke="none"/>
+    <rect x="0.5" y="0.5" width="75.877" height="75.877" fill="none"/>
+  </g>
+  <path id="Path_delete-empty-outline" data-name="Path / delete-empty-outline" d="M52.03,24.332l-3.2,5.542L9.972,7.452l3.2-5.542,9.738,5.606L27.269,6.33l13.87,8.008,1.185,4.388,9.706,5.606M6,56.653V18.214H22.24l22.2,12.813V56.653a6.406,6.406,0,0,1-6.406,6.406H12.406A6.406,6.406,0,0,1,6,56.653m6.406,0H38.032V34.871L20.286,24.621h-7.88Z" transform="translate(10.016 4.496)" fill="#f39"/>
+</svg>

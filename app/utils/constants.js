@@ -1,0 +1,22 @@
+export const RESTART_ON_REMOUNT = '@@saga-injector/restart-on-remount';
+export const DAEMON = '@@saga-injector/daemon';
+export const ONCE_TILL_UNMOUNT = '@@saga-injector/once-till-unmount';
+export const DATE_TIME_FORMAT = 'Do MMMM  YYYY, h:mm a';
+export const List_DATE_TIME_DISPLAY = 'dddd, MMMM,D,yyyy';
+export const API_DATE_FORMAT = 'yyyy-MM-DD';
+export const SEARCH_LIMIT = 12;
+export const NOTIFICATION_LIMIT = 20;
+export const APPOINTMENT_LIMIT = 5;
+export const SURGERIES_LIMIT = 5;
+export const DATE_FORMAT = 'DD-MMM-YYYY';
+export const NO_RECORD = 'No Data Available';
+
+export const APT_FORM_DATE = 'YYYY-MM-DD';
+export const APT_DATE_FORM = 'YYYY-MM-DD  h:mm';
+export const TIME = 'h:mm A';
+export const TIMESLOT = 'hh:mm A';
+export const APPOINTMENT_LIST_DATE = 'YYYY-MM-DDTh:mm';
+export const SURGERIES_LIST_DATE = 'YYYY-MM-DDThh:mm';
+export const EPISODE_DATE_FORMAT = 'DD-MM-YYYY';
+export const DATE_FIRST_FORMAT = 'DD-MM-YYYY';
+export const YEAR_24HOURS_DATE = 'YYYY-MM-DDTHH:mm';

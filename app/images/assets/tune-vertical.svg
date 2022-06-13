@@ -1,0 +1,7 @@
+<svg id="MDI_tune-vertical" data-name="MDI / tune-vertical" xmlns="http://www.w3.org/2000/svg" width="31.201" height="31.201" viewBox="0 0 31.201 31.201">
+  <g id="Boundary" fill="#727272" stroke="rgba(0,0,0,0)" stroke-width="1" opacity="0">
+    <rect width="31.201" height="31.201" stroke="none"/>
+    <rect x="0.5" y="0.5" width="30.201" height="30.201" fill="none"/>
+  </g>
+  <path id="Path_tune-vertical" data-name="Path / tune-vertical" d="M8.2,3H5.6v7.8H8.2V3M23.8,3H21.2V16h2.6V3M3,16H5.6V26.4H8.2V16h2.6V13.4H3V16M18.6,8.2H16V3H13.4V8.2H10.8v2.6h7.8V8.2M13.4,26.4H16v-13H13.4v13m5.2-7.8v2.6h2.6v5.2h2.6V21.2h2.6V18.6Z" transform="translate(0.9 0.9)" fill="#727272"/>
+</svg>

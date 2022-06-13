@@ -1,0 +1,316 @@
+export const GET_DRUGS_VALUESET = `
+{
+    "query": "a",
+    "result_fields": {
+    "brand_name": {
+    "raw": {
+    
+    }
+    },
+    "generic_name": {
+    "raw": {
+    
+    }
+    }
+    }
+    }
+`;
+//
+
+export const GET_SET_LIST = `query
+MasterDataQuery($url:String!){
+data:search(valueSetSearchCriteria:{
+nextResultUrl:null,
+sortOrder:"",
+resourceId:"",
+limit:0,
+url: $url,
+valueSetName:"",
+valueSetSystemCode:""
+})
+ {  
+   recordCount,
+   nextResultUrl,
+   valueSets
+   {
+       valueSet
+       {
+           resourceId,
+            url,
+            title,
+            name,
+            status,
+            compose
+            {
+                include
+                {
+                    system,
+                    concept
+                    {
+                        code,
+                        display
+                    }
+                }
+            }
+       }
+   }
+ }
+}`;
+
+export const GET_PATIENT_DETAIL = `
+query
+PatientDataQuery($id: String!){
+ data:patientDetails(patientDetailsInput:{
+resourceId:$id
+ })
+ {
+    patient
+        {
+            resourceId,
+            first,
+            last,
+            email,
+            phone,
+            birthDate,
+            middle,
+            display,
+            gender,
+            address,
+            district,
+            city,
+            state,
+            postalCode,
+            periodStart,
+            periodEnd,
+            addressType ,
+            image    ,
+            height{
+                unit ,value
+            },
+            weight{
+                unit,value
+            }
+        }
+ }
+}
+`;
+
+export const GET_MEDICAL_HISTORY_SET = `query
+MasterDataQuery($url:String!){
+data:search(valueSetSearchCriteria:{
+nextResultUrl:null,
+sortOrder:"",
+resourceId:"",
+limit:0,
+url: $url,
+valueSetName:"",
+valueSetSystemCode:""
+})
+ {  
+   recordCount,
+   nextResultUrl,
+   valueSets
+   {
+       valueSet
+       {
+           resourceId,
+            url,
+            title,
+            name,
+            status,
+            compose
+            {
+                include
+                {
+                    system,
+                    concept
+                    {
+                        code,
+                        display
+                    }
+                }
+            }
+       }
+   }
+ }
+}`;
+
+export const GET_TREATMENT_PLAN = `query
+MasterDataQuery($patientId:String,$resourceId:String,$search:String){
+data:treatmentPlannerSearch(treatmentPlannerSearchCriteria:{
+nextResultUrl:null,
+sortOrder:"",
+patientId:$patientId,
+resourceId:$resourceId,
+search:$search
+})
+ {  
+   recordCount,
+   nextResultUrl,
+   treatmentPlanProtocols
+   {
+calculateFor,
+       resourceId,
+            note,
+            height{
+            unit,value
+            }
+            weight{
+            unit,value
+            }
+            bSA{
+            unit,value
+            }
+            bMI{
+            unit,value
+            }
+            idealBodyWeight{
+            unit,value
+            }
+       treatmentIntent
+       {
+           code,
+           display,
+           text
+       },
+        therapyProtocol
+       {
+           code,
+           display,
+           text
+       },
+       patient
+       {
+           resourceType,
+           resourceId,
+           resourceReference
+       },
+       practitioner
+       {
+            resourceType,
+           resourceId,
+           resourceReference
+       },
+       protocol,
+       cycle,
+       dateAdministration,
+       dayMedicationProtocols
+       {
+          resourceId,
+          day,
+          date,
+          preMedicationProtocols
+          {
+              resourceId,
+             drugFrom,
+             drugName,
+             patientDose,
+             administrationDetail,
+             comment
+          },
+          therapyOrders
+          {
+              resourceId,
+             drugFrom,
+             drugName,
+             protocolDose{
+value,
+unit},
+             doseReduction
+             {
+                 value,
+                 unit
+             },
+             patientDose
+             {
+                value,
+                 unit
+             },
+             administrationDetail,
+             comment,
+             previousToxicity
+          },
+          supportiveProtocols
+          {
+               resourceId,
+             drugFrom,
+             drugName,
+            administrationDetail,
+             comment
+          }
+       },
+       dischargeInstructions
+       {
+             resourceId,
+             drugFrom,
+             drugName,
+             duration
+             {
+                 value,
+                 unit
+             },
+             frequency,
+             administrationDetail,
+             comment
+       }
+   }
+ }
+}
+`;
+
+export const GET_PRACTITIONER_DETAILS = `
+ query
+PatientDataQuery($id:String!){
+ data:practitionerSearch(practitionerSearchCriteria:{
+resourceId:$id
+})
+ {
+    recordCount,
+   nextResultUrl,
+   cancerPractitioner{
+   practitioner
+   {
+     resourceId,
+     active,
+     first,
+     middle,
+     last,
+     email,
+     age,
+     phone,
+     signatureImage,
+    signatureContentType,
+    qualifications
+    {
+       code
+       {
+          code,
+          display,
+          text
+       }
+    }
+     gender,
+     display,
+     practitionerRoleInOrganization
+     {
+         speciality
+         {
+             codeableSystem
+             code,
+            display,
+            text
+         },
+         practitionerRole
+         {
+             codeableSystem
+             code,
+            display,
+            text
+         }
+     }
+   }
+   }
+ 
+ }
+}
+ `;

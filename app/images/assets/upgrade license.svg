@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="MDI_rocket-outline" data-name="MDI / rocket-outline" opacity="0.6">
+    <g id="Boundary" stroke="rgba(0,0,0,0)" stroke-width="1" opacity="0">
+      <rect width="24" height="24" stroke="none"/>
+      <rect x="0.5" y="0.5" width="23" height="23" fill="none"/>
+    </g>
+    <path id="Path_rocket-outline" data-name="Path / rocket-outline" d="M12,2S7,4,7,12a19.473,19.473,0,0,0,1.67,7.83A2,2,0,0,0,10.5,21h3a2,2,0,0,0,1.83-1.17A19.306,19.306,0,0,0,17,12c0-8-5-10-5-10m1.5,17h-3A17.047,17.047,0,0,1,9,12c0-4.64,1.9-6.8,3-7.67,1.1.87,3,3.03,3,7.67a17.047,17.047,0,0,1-1.5,7M20,22l-3.86-1.55a20.754,20.754,0,0,0,1.51-4.72M7.86,20.45,4,22l2.35-6.27a20.754,20.754,0,0,0,1.51,4.72M12,12a2,2,0,1,1,2-2A2.006,2.006,0,0,1,12,12Z"/>
+  </g>
+</svg>

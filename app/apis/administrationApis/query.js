@@ -1,0 +1,163 @@
+export const GET_STAFF_LIST = `
+query
+PatientDataQuery{
+ data:staffSearch(staffSearchCriteria:{
+nextResultUrl:"",
+sortOrder:"",
+limit:100,
+fromDate:"",
+toDate:"",
+additionalParams:[
+    {patientSearchParamType:"string",patientSearchParamValue:"string"}
+    ]
+ })
+ {
+    recordCount,
+   nextResultUrl,
+   cancerPractitioner{
+   practitioner
+   {
+     resourceId,
+     active,
+     first,
+     middle,
+     last,
+     email,
+     age,
+     phone,
+     gender,
+     display,
+     birthDate,
+     address
+     {
+         line,
+         district,
+         city,
+         state,
+         postalCode,
+         periodStart,
+         periodEnd,
+         addressType
+     }
+   }
+   }
+ 
+ }
+}
+`;
+
+export const GET_LOCATION_LIST = `
+query
+PatientDataQuery($id:String!){
+  data:locationSearch(locationSearchCriteria:{
+  resourceId:$id
+  })
+  {
+      recordCount,
+      nextResultUrl,
+      cancerLocations
+      {
+         location
+         {
+           resourceId,
+           name,
+           status,
+           organization
+           {
+              resourceReference,
+              resourceId,
+              display,
+              resourceType
+           },
+           address
+           {
+               line,
+               city,
+               district,
+               state,
+               postalCode,
+               periodStart,
+               periodEnd,
+               addressType
+           },
+           hoursOfOperations
+           {
+               allDay,
+               openingTime,
+               closingTime,
+               daysOfWeek
+           }
+        }
+    }
+  }
+  }
+`;
+
+export const GET_LOCATION_DETAILS = `
+query
+PatientDataQuery($id:String!){
+  data:locationDetails(locationDetailsInput:{
+ resourceId:$id
+  })
+  {
+   location
+        {
+          resourceId,
+          name,
+          status,
+          email,
+          phone,
+          description,
+          longitude,
+          latitude,
+          altitude,
+          operationalStatus
+          {
+              codeableSystem,
+              code,
+              display,
+              text
+          },
+          type
+          {
+               codeableSystem,
+              code,
+              display,
+              text
+          },
+          physicalType
+          {
+               codeableSystem,
+              code,
+              display,
+              text
+          },
+          organization
+          {
+             resourceReference,
+             resourceId,
+             display,
+             resourceType
+          },
+          address
+          {
+              line,
+              city,
+              district,
+              state,
+              postalCode,
+              periodStart,
+              periodEnd,
+              addressType
+          },
+          hoursOfOperations
+          {
+              allDay,
+              openingTime,
+              closingTime,
+              daysOfWeek
+          }
+       }
+  }
+ }
+`;

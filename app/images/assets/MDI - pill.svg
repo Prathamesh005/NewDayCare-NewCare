@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="27.395" height="27.395" viewBox="0 0 27.395 27.395">
+  <g id="MDI_pill" data-name="MDI / pill" opacity="0.6">
+    <g id="Boundary" stroke="rgba(0,0,0,0)" stroke-width="1" opacity="0">
+      <rect width="24" height="24" stroke="none"/>
+      <rect x="0.5" y="0.5" width="23" height="23" fill="none"/>
+    </g>
+    <path id="Path_pill" data-name="Path / pill" d="M4.8,14.217,14.217,4.8A7.994,7.994,0,0,1,25.522,16.108l-9.415,9.415A7.994,7.994,0,0,1,4.8,14.217m1.891,1.891a5.294,5.294,0,0,0-1.385,5.14l7.977-7.963,5.646,5.646,4.7-4.714a5.32,5.32,0,0,0-7.524-7.524Z" transform="translate(-0.465 -0.465)"/>
+  </g>
+</svg>

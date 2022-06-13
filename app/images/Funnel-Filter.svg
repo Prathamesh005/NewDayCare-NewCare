@@ -1,0 +1,7 @@
+<svg id="MDI_filter" data-name="MDI / filter" xmlns="http://www.w3.org/2000/svg" width="34.461" height="34.461" viewBox="0 0 34.461 34.461">
+  <g id="Boundary" stroke="rgba(0,0,0,0)" stroke-width="1" opacity="0">
+    <rect width="34.461" height="34.461" stroke="none"/>
+    <rect x="0.5" y="0.5" width="33.461" height="33.461" fill="none"/>
+  </g>
+  <path id="Path_filter" data-name="Path / filter" d="M18.359,15.923V27.237a1.377,1.377,0,0,1-.416,1.192,1.43,1.43,0,0,1-2.025,0l-2.886-2.886a1.42,1.42,0,0,1-.416-1.192V15.923h-.043L4.3,5.326a1.437,1.437,0,0,1,.244-2.01A1.5,1.5,0,0,1,5.436,3h20.1a1.5,1.5,0,0,1,.89.316,1.437,1.437,0,0,1,.244,2.01L18.4,15.923Z" transform="translate(1.745 1.308)" fill="#727272"/>
+</svg>

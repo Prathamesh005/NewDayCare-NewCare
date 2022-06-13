@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- The first thing in any HTML file should be the charset -->
+    <meta charset="utf-8" />
+
+    <!-- Make the page mobile compatible -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Allow installing the app to the homescreen -->
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <link rel="icon" href="/favicon.ico" />
+
+    <link
+      href="//unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <title>nuQare - Intelligent Patient Care</title>
+
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0px;
+        font-family: 'Yantramanav', sans-serif !important;
+        /* padding-top: 55px; */
+      }
+
+      header {
+        background-color: #fff !important;
+      }
+
+      #app {
+        height: 100%;
+      }
+    </style>
+
+    <script type="text/jsx">
+      (function(){ var s1=document.createElement('script'),s0=document.getElementsByTagName('script')[0]; s1.async=true; s1.src='https://floatbot.ai/portal/wbot/index.php?botId=6038a0ade6293605f15dcb62'; s1.charset='UTF-8'; s1.setAttribute('crossorigin','*'); s0.parentNode.insertBefore(s1,s0); })();
+    </script>
+    <script type="text/jsx">
+      window.numberOfAjaxCAllPending = 0;
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-HPCD80XBJ9"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-HPCD80XBJ9');
+    </script>
+  </head>
+
+  <body>
+    <!-- Display a message if JS has been disabled on the browser. -->
+    <noscript
+      >If you're seeing this message, that means
+      <strong>JavaScript has been disabled on your browser</strong>, please
+      <strong>enable JS</strong> to make this app work.</noscript
+    >
+
+    <!-- The app hooks into this div -->
+    <div id="app"></div>
+
+    <!-- A lot of magic happens in this file. HtmlWebpackPlugin automatically injects all assets (e.g. bundle.js, main.css) with the correct HTML tags, which is why they are missing in this file. Don't add any assets here! (Check out webpack.dev.babel.js and webpack.prod.babel.js if you want to know more) -->
+  </body>
+</html>

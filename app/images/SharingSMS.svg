@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56">
+  <g id="Group_7363" data-name="Group 7363" transform="translate(0.085)">
+    <g id="Rectangle_2795" data-name="Rectangle 2795" transform="translate(-0.085)" fill="#f4f4f4" stroke="rgba(112,112,112,0.4)" stroke-width="0.5">
+      <rect width="56" height="56" rx="5" stroke="none"/>
+      <rect x="0.25" y="0.25" width="55.5" height="55.5" rx="4.75" fill="none"/>
+    </g>
+    <g id="MDI_message-processing" data-name="MDI / message-processing" transform="translate(12 12)">
+      <g id="Boundary" transform="translate(-0.085 0)" fill="#ff5cad" stroke="rgba(0,0,0,0)" stroke-width="1" opacity="0">
+        <rect width="32" height="32" stroke="none"/>
+        <rect x="0.5" y="0.5" width="31" height="31" fill="none"/>
+      </g>
+      <path id="Path_message-processing" data-name="Path / message-processing" d="M21.8,13.88H19.16V11.24H21.8m-5.28,2.64H13.88V11.24h2.64m-5.28,2.64H8.6V11.24h2.64M25.76,2H4.64A2.64,2.64,0,0,0,2,4.64V28.4l5.28-5.28H25.76a2.64,2.64,0,0,0,2.64-2.64V4.64A2.639,2.639,0,0,0,25.76,2Z" transform="translate(0.8 0.8)" fill="#ff5cad"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="MDI_credit-card-clock-outline" data-name="MDI / credit-card-clock-outline" opacity="0.6">
+    <g id="Boundary" stroke="rgba(0,0,0,0)" stroke-width="1" opacity="0">
+      <rect width="24" height="24" stroke="none"/>
+      <rect x="0.5" y="0.5" width="23" height="23" fill="none"/>
+    </g>
+    <path id="Path_credit-card-clock-outline" data-name="Path / credit-card-clock-outline" d="M16,14h1.5v2.82l2.44,1.41-.75,1.3L16,17.69V14m8,3a7,7,0,0,1-13.33,3H4a2,2,0,0,1-2-2V6A1.993,1.993,0,0,1,4,4H20a2,2,0,0,1,2,2v6.1A6.958,6.958,0,0,1,24,17M10,17a7,7,0,0,1,2.1-5H4v6h6.07A4.763,4.763,0,0,1,10,17m7-5a5,5,0,1,0,5,5,5,5,0,0,0-5-5m3-4V6H4V8Z" transform="translate(-1 -2)"/>
+  </g>
+</svg>

@@ -1,0 +1,1942 @@
+export const GET_BY_VALUESET = `query
+MasterDataQuery($url:String!){
+data:search(valueSetSearchCriteria:{
+nextResultUrl:null,
+sortOrder:"",
+resourceId:"",
+limit:0,
+url: $url,
+valueSetName:"",
+valueSetSystemCode:""
+})
+ {  
+   recordCount,
+   nextResultUrl,
+   valueSets
+   {
+       valueSet
+       {
+           resourceId,
+            url,
+            title,
+            name,
+            status,
+            compose
+            {
+                include
+                {
+                    system,
+                    concept
+                    {
+                        code,
+                        display
+                    }
+                }
+            }
+       }
+   }
+ }
+}`;
+export const GET_PRACTITIONER_LIST = `
+query
+PatientDataQuery($payload: String!){
+data:practitionerSearch(practitionerSearchCriteria:{
+nextResultUrl:"",
+sortOrder:"",
+limit:100,
+fromDate:"",
+toDate:"",
+additionalParams:[
+    {patientSearchParamType:"Name",patientSearchParamValue:$payload}
+    ]
+ })
+ {
+    recordCount,
+   nextResultUrl,
+   cancerPractitioner{
+   practitioner
+   {
+     resourceId,
+     active,
+     first,
+     middle,
+     last,
+     email,
+     age,
+     phone,
+     gender,
+     display,
+     practitionerRoleInOrganization
+     {
+         speciality
+         {
+             codeableSystem
+             code,
+            display,
+            text
+         },
+     }
+   }
+   }
+ 
+ }
+}
+
+`;
+
+export const GET_PRACTITIONER_DETAILS = `
+query
+PatientDataQuery($id:String!){
+ data:practitionerDetails(practitionerDetailsInput:{
+resourceId:$id
+ })
+ {
+   practitioner
+   {
+     resourceId,
+     active,
+     first,
+     middle,
+     last,
+     gender,
+     display,
+     email,
+     age,
+     phone,
+     image,
+    contentType,
+     signatureImage,
+    signatureContentType,
+         medicalRegistration,
+     registrationNo,
+     birthDate
+     about,
+     expertiseIn,
+     experience,
+     referenceLinks
+     {
+          title,
+          description,
+          hyperlink
+     },
+     channel
+        languages
+    {
+        codeableSystem
+             code,
+            display,
+            text
+    },
+    qualifications
+    {
+       code
+       {
+          code,
+          display,
+          text
+       },
+       qualification
+    }
+    
+     practitionerRoleInOrganization
+     {
+         speciality
+         {
+             codeableSystem
+             code,
+            display,
+            text
+         },
+         practitionerRole
+         {
+             codeableSystem
+             code,
+            display,
+            text
+         }
+     }
+   }
+   
+   }
+}
+ `;
+
+export const GET_PATIENT_LIST_FROM_SEARCH = `
+query
+PatientDataQuery($patientName: String!){
+ data:search(patientSearchCriteria:{
+search:"Patient",
+additionalParams:[
+    {
+        patientSearchParamType:"Name",
+        patientSearchParamValue:$patientName
+    },
+     {
+        patientSearchParamType:"Phone",
+        patientSearchParamValue:null
+    },
+     
+ ]
+})
+ {  
+     recordCount,
+     nextResultUrl,
+     cancerPatients
+     {
+        patient
+        {
+            resourceId,
+            nQPatientId,
+            first,
+            last,
+            email,
+            phone,
+            birthDate,
+            age,
+            middle,
+            display,
+            gender,
+            address,
+            city,
+            state,
+            image,
+            contentType
+        },
+        
+     }
+  
+ }
+}
+`;
+
+export const GET_APPOINTMENT_DETAILS = `
+query
+PatientDataQuery($id:String!){
+ data:patientAppointmentScheduled(cancerResourceReferenceInput:{
+   resourceId :$id
+ })
+ {
+   patientAppointment
+   {
+       resourceId,
+        serviceCategory
+        {
+            codeableSystem,
+            code,
+            text,
+            display
+        },
+         serviceType
+        {
+            codeableSystem,
+            code,
+            text,
+            display
+        },
+          speciality
+        {
+            codeableSystem,
+            code,
+            text,
+            display
+        },
+     participants
+     { 
+        role,    
+       actor
+       {
+           resourceId,
+           identifier,
+           resourceType,
+           resourceReference,
+           display
+       } 
+     },
+      slot
+       {
+          resourceId,
+           identifier,
+           resourceType,
+           resourceReference,
+           display,
+       },
+       cancerPatient
+        {
+            active
+        },
+        appointmentType
+        {
+            codeableSystem,
+            code,
+            text,
+            display
+        },
+        appointmentCancellationReason
+        {
+            codeableSystem,
+            code,
+            text,
+            display
+        },
+        reasonResourceReference
+            {
+                resourceId,
+                identifier,
+                resourceType,
+                resourceReference,
+                display,
+            },
+            reasonCode
+            {
+                codeableSystem,
+                code,
+                text,
+                display
+            },
+       appointmentStatus,
+       comments,
+        createdDate,
+        startDateTime,
+        endDateTime,
+        patientInstruction,
+        priority
+   }
+ 
+ }
+}`;
+
+export const GET_BY_DIAGNOSIS_VALUESET = payload => {
+  let url = (payload && payload.url) || '';
+  let tnmType = (payload && payload.tnmType) || '';
+  let cancerType = (payload && payload.cancerType) || '';
+  return `query
+MasterDataQuery{
+data:diagnosticStagingValueSetSearch(diagnosticStagingSearchCriteria:{
+nextResultUrl:null,
+sortOrder:"",
+resourceId:"",
+limit:0,
+cancerType:${JSON.stringify(cancerType)},
+tnmType:${JSON.stringify(tnmType)}
+dropdownSearch:${JSON.stringify(url)}
+})
+ {  
+       valueSet
+       {
+           resourceId,
+            url,
+            title,
+            name,
+            status,
+            compose
+            {
+                include
+                {
+                    system,
+                    concept
+                    {
+                        code,
+                        display
+                    }
+                }
+            }
+       }
+}
+}`;
+};
+
+export const GET_PROVIDER_NAME = `
+query
+PatientDataQuery{
+data:organizationSearch(organizationSearchCriteria:{
+status:"ins"
+})
+{
+    recordCount,
+    nextResultUrl,
+    cancerOrganization
+    { 
+       organization
+       {
+         resourceId,
+         name,
+      }
+  }
+}
+}
+`;
+export const GET_PATIENT_VITAL = `
+query
+PatientReportedOutcomeQuery($id:String!){
+ data:vitalDetail(vitalSearchCriteria:{resourceId:$id
+ })
+ {
+     heartRateData
+     {
+         effectiveDateTime,
+         recordedBy,
+         value
+         {
+             unit,
+             value,
+             code
+         }
+     },
+     temperatureData
+     {
+         effectiveDateTime,
+         recordedBy,
+         value
+         {
+             unit,
+             value,
+             code
+         }
+     },
+     bloodPressureData
+     {
+         effectiveDateTime,
+         recordedBy,
+         valueCodeableConcept
+         {
+            code,
+            display,text
+         }
+     },
+     oxygenSaturationData
+     {
+         effectiveDateTime,
+         recordedBy,
+         value
+         {
+             unit,
+             value,
+             code
+         }
+     },
+     respirationData
+     {
+         effectiveDateTime,
+         recordedBy,
+         value
+         {
+             unit,
+             value,
+             code
+         }
+     },
+     weightData
+     {
+         effectiveDateTime,
+         recordedBy,
+         value
+         {
+             unit,
+             value,
+             code
+         }
+     },
+     glucoseData
+     {
+        effectiveDateTime,
+        recordedBy,
+        value
+        {
+            unit,
+            value,
+            code
+        }
+    },
+    heightData
+    {
+        effectiveDateTime,
+        recordedBy,
+        value
+        {
+            unit,
+            value,
+            code
+        }
+    },
+}
+}
+`;
+export const GET_PATIENT_VITAL_ENCOUNTER_WISE = `
+query
+PatientReportedOutcomeQuery($id:String!,$appointmentId:String!){
+ data:vitalDetail(vitalSearchCriteria:{
+     resourceId:$id,
+     appointmentId:$appointmentId,
+ })
+ {
+     heartRateData
+     {
+         value
+         {
+             unit,
+             value,
+             code
+         }
+     },
+     temperatureData
+     {
+         value
+         {
+             unit,
+             value,
+             code
+         }
+     },
+     bloodPressureData
+     {
+         valueCodeableConcept
+         {
+            code,
+            display,text
+         }
+     },
+     oxygenSaturationData
+     {
+         value
+         {
+             unit,
+             value,
+             code
+         }
+     },
+     respirationData
+     {
+         value
+         {
+             unit,
+             value,
+             code
+         }
+     },
+     weightData
+     {
+         value
+         {
+             unit,
+             value,
+             code
+         }
+     },
+     glucoseData
+     {
+        value
+        {
+            unit,
+            value,
+            code
+        }
+    },
+}
+}
+`;
+export const GET_HOPI = `
+query
+PatientDataQuery($id:String!){
+ data:documentReferenceSearch(documentReferenceCriteria:{
+nextResultUrl:"",
+sortOrder:"",
+fromDate:null,
+toDate:null,
+search:"HOPI"
+resourceId:$id
+})
+ {  
+     recordCount,
+     nextResultUrl,
+     cancerDocumentReferences
+     {
+        cancerDocumentReference
+        {
+            resourceId,
+            status,
+            docStatus,
+            recordName,
+            date,
+            description,
+            encounter{
+                resourceId,
+                resourceType,
+                resourceReference,
+                display
+            },
+             
+        }
+     }
+  
+ }
+}`;
+
+export const GET_HOPI_ENCOUNTER_WISE = `
+query
+PatientDataQuery($id:String!,$appointmentId:String!){
+ data:documentReferenceSearch(documentReferenceCriteria:{
+nextResultUrl:"",
+sortOrder:"",
+fromDate:null,
+toDate:null,
+search:"HOPI"
+resourceId:$id,
+appointmentId:$appointmentId
+})
+ {  
+     recordCount,
+     nextResultUrl,
+     cancerDocumentReferences
+     {
+        cancerDocumentReference
+        {
+            resourceId,
+            status,
+            docStatus,
+            recordName,
+            date,
+            description,
+            encounter{
+                resourceId,
+                resourceType,
+                resourceReference,
+                display
+            },
+        }
+     }
+  
+ }
+}`;
+
+export const GET_PAST_ILLNESS = `
+query
+PatientDataQuery($id:String!){
+data:everything(patientEverythingCriteria:{
+patientResourceId :$id,
+nextResultUrl: null,
+cancerResourceTypes:[
+CANCER_PATIENT,
+PAST_HOSPITALIZATION_PERTAINING_ILLNESS
+]
+})
+{
+ nextResultUrl,
+ recordCount
+ 
+   pastHospitalizationPertainingIllness
+   {
+        resourceId,
+        note,
+        description,
+        effectiveDateTime,
+   },
+}
+}`;
+
+export const GET_PAST_OTHER_ILLNESS = `
+query
+PatientDataQuery($id:String!){
+data:everything(patientEverythingCriteria:{
+patientResourceId :$id,
+nextResultUrl: null,
+cancerResourceTypes:[
+CANCER_PATIENT,
+PAST_HOSPITALIZATION_OTHER_ILLNESS,
+CANCER_RELATED_ENCOUNTER_OPD
+]
+})
+{
+ nextResultUrl,
+ recordCount,
+ cancerEncounterOPDs
+    {
+        resourceId
+    },
+pastHospitalizationOtherIllness
+   {
+        resourceId,
+        status,
+        reason,
+        note,
+        description,
+        effectiveDateTime,
+   },
+}
+}`;
+
+export const GET_MEDICAL_HISTORY = `
+query
+PatientDataQuery($id:String!){
+data:everything(patientEverythingCriteria:{
+patientResourceId :$id,
+nextResultUrl: null,
+cancerResourceTypes:[
+CANCER_PATIENT,
+COMORBID_CONDITION,
+CANCER_ALLERGY_INTOLERANCE,
+FAMILY_MEMBER_HISTORY,
+]
+})
+{
+ nextResultUrl,
+ recordCount
+ 
+    comorbidConditions{
+        code
+        {
+            codeableSystem,
+            code,
+            text,
+            display
+        },
+        note,
+        resourceId
+    },
+    cancerAllergyIntolerances
+    {
+        resourceId,
+        note,
+        reaction
+        {
+            substance
+            {
+                codeableSystem,
+                code,
+                text,
+                display
+            },
+        }
+    },
+    familyMemberHistories
+    {
+        resourceId,
+        deceasedBoolean,
+          relationship
+        {
+            codeableSystem,
+            code,
+            text,
+            display
+        },
+        condition
+        {
+              code
+            {
+                codeableSystem,
+                code,
+                text,
+                display
+            },
+            outcome
+            {
+                codeableSystem,
+                code,
+                text,
+                display
+            },
+              onSetAge,
+        }
+    }
+}
+}`;
+
+export const GET_PAST_HISTORY_ENCOUNTER_WISE = `
+query
+PatientDataQuery($id:String!,$appointmentId:String!){
+data:encounterEverything(patientEverythingCriteria:{
+patientResourceId :$id,
+appointmentId:$appointmentId,
+nextResultUrl: null,
+cancerResourceTypes:[
+CANCER_PATIENT,
+CANCER_DIAGNOSTIC_REPORT,
+CLINICAL_COMPLAINS_OBSERVATION,
+CANCER_CLINICAL_IMPRESSION
+]
+})
+{
+ nextResultUrl,
+ recordCount,
+ appointmentSummaryDate,
+ cancerDiagnosticReports
+   {
+       resourceId,
+       code
+       {
+          codeableSystem,
+               code,
+               text,
+               display
+       }
+       conclusion,
+       effectiveDateTime
+   },
+    clinicalComplainses
+   {
+        resourceId,
+       clinicalComplains
+   },
+   cancerClinicalImpressions
+   {
+    resourceId
+     status,
+     date,
+     description,
+     protocol,
+     cancerPatientResourceReference
+     {
+          resourceId,
+            resourceType,
+           resourceReference,
+           display  
+     },
+     investigation
+     {
+         code
+         {
+             codeableSystem,
+               code,
+               text,
+               display
+         },
+         item
+         {
+              resourceId,
+            resourceType,
+           resourceReference,
+           display  
+         }
+     }
+   },
+}
+}`;
+
+export const GET_TYPES_OF_TREATMENT = `
+query
+PatientDataQuery($id:String!){
+data:getTreatmentEventDetail(getTreatmentEventCriteria:{
+patientResourceId :$id,
+})
+{
+    treatmentEvents
+    {
+       resourceId,
+       type,
+       date,
+       briefTreatment,
+       rECISTObservation
+       {
+            resourceId,
+            code
+            {
+                    codeableSystem,
+                code,
+                text,
+                display
+            },
+            description
+        }
+   }
+}
+}
+`;
+
+export const GET_PERSONAL_HISTORY = `query
+PatientDataQuery($id:String!){
+data:everything(patientEverythingCriteria:{
+patientResourceId :$id,
+nextResultUrl: null,
+cancerResourceTypes:[
+CANCER_PATIENT,
+LIFE_STYLE_INDICATOR,
+OBGYN_OBSERVATION,
+CANCER_IMMUNIZATION,
+NUTRITION_ORDER
+]
+})
+{
+ nextResultUrl,
+ recordCount
+ lifeStyleIndicators
+   {
+       resourceId,
+       note,
+       resourceType,
+       use,
+       valueCodeableConcept
+       {
+            codeableSystem,
+           code,
+           text,
+           display
+       }
+   },
+   oBGYNObservation
+    {
+        resourceId,
+        code
+        {
+            codeableSystem,
+            code,
+            text,
+            display
+        },
+        valueQuantity
+        {
+            unit,
+            value
+        },
+        valueCodeableConcept
+        {
+            codeableSystem,
+            code,
+            text,
+            display
+        },
+        component
+        {
+            code
+            {
+                codeableSystem,
+                code,
+                text,
+                display
+            },
+                valueQuantity
+            {
+                unit,
+                value
+            },
+            valueCodeableConcept
+            {
+                codeableSystem,
+                code,
+                text,
+                display
+            },
+        }
+    },
+    cancerImmunizations
+    {
+        resourceId,
+        vaccineCode
+        {
+            codeableSystem,
+                code,
+                text,
+                display
+        }
+        
+    },
+    careNutritionOrder
+    {
+        resourceId,
+        dateTime,
+        foodPreferenceModifier
+        {
+            codeableSystem
+            code,
+            display,
+            text
+        }
+    },
+
+}
+}`;
+
+export const GET_GENERAL_EXAMINATION = `
+query
+PatientDataQuery($id:String!){
+data:everything(patientEverythingCriteria:{
+patientResourceId :$id,
+nextResultUrl: null,
+cancerResourceTypes:[
+CANCER_PATIENT,
+EXAMINATION_OBSERVATION,
+ECOG_PERFORMANCE_STATUS,
+KARNOFSKY_PERFORMANCE_STATUS,
+GERIATRIC_ASSESSMENT
+]
+})
+{
+ nextResultUrl,
+ recordCount,
+    generalExaminations
+   {
+       resourceId,
+       resourceName,
+       description,
+       effectiveDateTime,
+       valueCodeableConcept
+       {
+           codeableSystem,
+           code,display,
+           text
+       }
+   },
+   systemicExaminations
+   {
+       resourceId,
+       status,
+       description,
+       resourceName,
+       effectiveDateTime,
+       valueString
+   },
+   inspection
+   {
+        resourceId,
+       status,
+       description,
+       resourceName,
+       effectiveDateTime,
+       valueString
+   },
+   palpation
+   {
+        resourceId,
+       status,
+       description,
+       resourceName,
+       effectiveDateTime,
+       valueString
+   },
+   eCOGPerformanceStatus
+    {
+        resourceId,
+        effectiveDateTime,
+        valueInteger
+    },
+    karnofskyPerformanceStatus
+    {
+        resourceId,
+        effectiveDateTime,
+        valueInteger
+    },
+    cancerGeriatricAssessment
+    {
+        resourceId,
+        value,
+        effectiveDateTime
+    },
+}
+}
+`;
+
+export const GET_GENERAL_EXAMINATION_ENCOUNTER_WISE = `
+query
+PatientDataQuery($id:String!,$appointmentId:String!){
+data:encounterEverything(patientEverythingCriteria:{
+patientResourceId :$id,
+appointmentId:$appointmentId,
+nextResultUrl: null,
+cancerResourceTypes:[
+CANCER_PATIENT,
+EXAMINATION_OBSERVATION,
+ECOG_PERFORMANCE_STATUS,
+KARNOFSKY_PERFORMANCE_STATUS,
+GERIATRIC_ASSESSMENT
+]
+})
+{
+ nextResultUrl,
+ recordCount,
+    generalExaminations
+   {
+       resourceId,
+       resourceName,
+       description,
+       effectiveDateTime,
+       valueCodeableConcept
+       {
+           codeableSystem,
+           code,display,
+           text
+       }
+   },
+   systemicExaminations
+   {
+       resourceId,
+       status,
+       description,
+       resourceName,
+       effectiveDateTime,
+       valueString
+   },
+   inspection
+   {
+        resourceId,
+       status,
+       description,
+       resourceName,
+       effectiveDateTime,
+       valueString
+   },
+   palpation
+   {
+        resourceId,
+       status,
+       description,
+       resourceName,
+       effectiveDateTime,
+       valueString
+   },
+   eCOGPerformanceStatus
+    {
+        resourceId,
+        effectiveDateTime,
+        valueInteger
+    },
+    karnofskyPerformanceStatus
+    {
+        resourceId,
+        effectiveDateTime,
+        valueInteger
+    },
+    cancerGeriatricAssessment
+    {
+        resourceId,
+        value,
+        effectiveDateTime
+    },
+}
+}
+`;
+
+export const CANCER_GERIATRIC_ASSESSMENT_SET = `
+query
+PatientReportedOutcomeQuery{
+ data:getAllQuestionnaire(getAllDetailsInput:{
+ name:"ComprehensiveGeriatricAssessment",
+ version:null,
+ status:"Active"
+ })
+ {
+     recordCount,
+     nextResultUrl
+     cancerQuestionnaire
+     {
+        questionnaire
+        {
+            resourceId,
+            name,
+            status,
+            version,
+            items
+            {
+                code,
+                display,
+                subItems
+                {
+                    code,
+                    display,
+                    subItems
+                    {
+                        code,
+                        display
+                    }
+                }
+            }
+         }
+ 
+      }
+}
+}`;
+
+export const GET_DIAGNOSIS = `
+query
+PatientDataQuery($id:String!){
+data:getDiagnosisDetail(getDiagnosisDetailCriteria:{
+patientResourceId :$id,
+nextResultUrl: null,
+cancerResourceTypes:[
+CANCER_PATIENT,
+PRIMARY_CANCER_CONDITION,
+
+TNM_CLINICAL_STAGE_GROUP,
+TNM_CLINICAL_PRIMARY_TUMOR_CATEGORY,
+TNM_PATHOLOGICAL_PRIMARY_TUMOR_CATEGORY,
+TNM_PATHOLOGICAL_STAGE_GROUP,
+TNM_POST_THERAPY_PRIMARY_TUMOR_CATEGORY,
+TNM_POST_THERAPY_STAGE_GROUP,
+
+TUMOR_MARKER,
+]
+})
+{
+    diagnosisCondition
+    {
+        resourceId,
+        note,
+        verificationStatus
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       },
+       bodySideWithLaterality
+       {
+            bodySite
+         {
+            codeableSystem,
+            code,
+            text,
+            display
+        },
+            laterality
+        {
+            codeableSystem,
+            code,
+            text,
+            display
+        }
+       },
+        histologyMorphologyBehaviour
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       },
+       grade
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       },
+       onset,
+       category,
+       code
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       }
+       stage
+       {
+            summary
+           {
+               codeableSystem,
+               code,
+               text,
+               display
+           },
+            assessment
+           {
+               resourceId,
+               resourceType,
+               resourceReference,
+               display
+           }
+       }
+    },
+    molecularTests
+    {
+        code
+        {
+          codeableSystem
+          code
+          text
+          display
+        },
+        conclusion,
+        effectiveDateTime,
+        conclusion,
+        resourceId
+    },
+    tNMClinicalStageGroup
+   {
+       resourceId,
+       value
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       },
+       tNMClinicalCategoryResourceReferences
+       {
+           resourceId,
+           resourceType,
+           resourceReference,
+           display
+       }
+       code,
+       status,
+       effectiveDate
+   },
+    tNMClinicalPrimaryTumorCategory
+   {
+       resourceId,
+       value
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       },
+   },
+    tNMClinicalDistantMetastasesCategory
+   {
+       resourceId,
+       value
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       },
+        code,
+       status,
+       effectiveDate
+   },
+    tNMClinicalRegionalNodesCategory
+   {
+       resourceId,
+       value
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       }
+   },
+     tNMPathologicalStageGroup
+   {
+       resourceId,
+       value
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       }
+   },
+     tNMPathologicalRegionalNodesCategory
+   {
+       resourceId,
+       value
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       }
+   },
+     tNMPathologicalPrimaryTumorCategory
+   {
+       resourceId,
+       value
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       }
+   },
+     tNMPathologicalDistantMetastasesCategory
+   {
+       resourceId,
+       value
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       }
+   },
+
+     tNMPostTherapyStageGroup
+   {
+       resourceId,
+       value
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       },
+       tNMPostTherapyCategoryResourceReferences
+       {
+          resourceId,
+           resourceType,
+           resourceReference,
+           display
+       },
+        code,
+       status,
+       effectiveDate
+   },
+     tNMPostTherapyRegionalNodesCategory
+   {
+       resourceId,
+       value
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       }
+   },
+     tNMPostTherapyPrimaryTumorCategory
+   {
+       resourceId,
+       value
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       }
+   },
+     tNMPostTherapyDistantMetastasesCategory
+   {
+       resourceId,
+       value
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       }
+   },
+   tumorMarkers
+   {
+       resourceId,
+       code
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       },
+       valueCodeableConcept
+       {
+           codeableSystem,
+           code,
+           text,
+           display
+       },
+       note,
+       valueQuantity
+       {
+           system,
+           unit,
+           value,
+           code
+       },
+   },
+}
+}`;
+
+export const GET_ADVICE = `
+query
+PatientDataQuery($id:String!,$appointmentId:String!){
+    data:encounterEverything(patientEverythingCriteria:{
+    patientResourceId :$id,
+    appointmentId:$appointmentId,
+nextResultUrl: null,
+cancerResourceTypes:[
+CANCER_RELATED_SERVICE_REQUEST
+]
+
+})
+{
+ nextResultUrl,
+ recordCount,
+ cancerServiceRequests
+ {
+   resourceId,
+   status,
+   intent,
+   priority,
+   fromDate,
+   toDate,
+    code
+   {
+       codeableSystem,
+       code,
+       text,
+       display
+   },
+   category
+   {
+       codeableSystem,
+       code,
+       text,
+       display
+   },
+   cancerLocationResourceReference
+   {
+      resourceId,
+      resourceType,
+      resourceReference,
+      display
+   },
+   requester
+   {
+      resourceId,
+      resourceType,
+      resourceReference,
+      display
+   },
+    bodySite
+   {
+      codeableSystem,
+       code,
+       text,
+       display
+   },
+     reasonCode
+   {
+      codeableSystem,
+       code,
+       text,
+       display
+   }
+ }
+ }
+}`;
+
+export const GET_TREATMENT_PLAN = `
+query
+PatientDataQuery($id:String!){
+data:getTreatmentPlanDetail(getTreatmentPlanCriteria:{
+patientResourceId :$id,
+})
+{
+    treatmentIntent
+        {
+               codeableSystem,
+               code,
+               text,
+               display
+           },
+    treatmentPlans
+    {
+       resourceId,
+       resourceType,
+       resourceReference,
+       display
+   }
+}
+}`;
+
+export const GET_TREATMENT_PROTOCOL = `query
+PatientDataQuery($id:String!){
+data:everything(patientEverythingCriteria:{
+patientResourceId :$id,
+nextResultUrl: null,
+cancerResourceTypes:[
+CANCER_PATIENT,
+CANCER_RELATED_MEDICATION_STATEMENT,
+CANCER_RELATED_MEDICATION_REQUEST
+]
+})
+    {
+    nextResultUrl,
+    recordCount
+    regimenProtocolRequests
+   {
+       resourceId,
+       start,
+       end,
+       cycle,
+       regimen,
+       status,
+        category
+        {
+               codeableSystem,
+               code,
+               text,
+               display
+           },
+        treatmentIntent
+        {
+               codeableSystem,
+               code,
+               text,
+               display
+           },
+       cancerPatientResourceReference
+       {
+           resourceId,
+           resourceType,
+           resourceReference,
+           display
+       }
+
+   },
+     
+    }
+}`;
+
+export const GET_TREATMENT_PROTOCOL_VALUESET = `
+query
+PatientDataQuery($id:String!){
+data:regimenSearch(regimenSearchCriteria:{
+resourceId :$id,
+search:"TreatmentAdministration"
+})
+{
+ nextResultUrl,
+ recordCount,
+cancerMedicationRequests
+   {
+       resourceId,
+      regimenTreatment,
+      regimen
+   }
+
+   }
+}`;
+
+export const GET_ENCOUNTER_WISE_PRESCRIBED = `
+query
+PatientDataQuery($appointmentId:String!, $id:String!){
+data:encounterEverything(patientEverythingCriteria:{
+patientResourceId :$id,
+appointmentId:$appointmentId,
+nextResultUrl: null,
+cancerResourceTypes:[
+CANCER_PATIENT,
+CANCER_RELATED_MEDICATION_REQUEST,
+]
+})
+{
+ nextResultUrl,
+ recordCount,
+ cancerMedicationRequests
+   {
+       resourceId,
+       authoredOn
+       status,
+       intent,
+        category
+        {
+               codeableSystem,
+               code,
+               text,
+               display
+           },
+        treatmentIntent
+        {
+               codeableSystem,
+               code,
+               text,
+               display
+           },
+        medicationCodeableConcept
+        {
+               codeableSystem,
+               code,
+               text,
+               display
+           },
+       medicationResourceReference
+       {
+           resourceId,
+           resourceType,
+           resourceReference,
+           display
+       },
+       cancerPatientResourceReference
+       {
+           resourceId,
+           resourceType,
+           resourceReference,
+           display
+       },
+         requester
+       {
+           resourceId,
+           resourceType,
+           resourceReference,
+           display
+       },
+       dosageInstruction
+       {
+           method
+         {
+               codeableSystem,
+               code,
+               text,
+               display
+           },
+           route
+          {
+               codeableSystem,
+               code,
+               text,
+               display
+           },
+           doseQuantity
+           {
+               system,
+               unit,
+               value,
+               code
+           }
+            numerator
+           {
+               system,
+               unit,
+               value,
+               code
+           },
+            denominator
+           {
+               system,
+               unit,
+               value,
+               code
+           },
+           start,
+           end,
+           patientInstruction,
+           text,
+           period,
+           periodMax,
+           periodUnit,
+           frequency,
+           count,
+           countMax,
+           duration,
+           durationMax,
+           durationUnit,
+           code{
+                codeableSystem,
+               code,
+               text,
+               display
+           },
+           when,
+           dayOfWeek,
+           timeOfDay,
+       }
+
+   },
+}
+}`;
+
+export const GET_ENCOUNTER_WISE_ADDITIONAL_DATA = `
+query
+PatientDataQuery($id:String!,$appointmentId:String!){
+    data:encounterEverything(patientEverythingCriteria:{
+    patientResourceId :$id,
+    appointmentId:$appointmentId,
+nextResultUrl: null,
+cancerResourceTypes:[
+    CANCER_DOCUMENT_REFERENCE,
+    CANCER_PATIENT_APPOINTMENT,
+    DISCUSSION
+]
+})
+{
+ nextResultUrl,
+ recordCount,
+ visitNote
+ {
+    resourceId
+    description
+    },
+    
+   scheduledFollowup
+   {
+      resourceId,
+      startDateTime
+   },
+   discussionCommunication
+   {
+       resourceId,
+       status,
+       sent,
+       received,
+       priority,
+       note,
+   },
+}
+}
+`;
+export const GET_REFERRED_TO = `query
+PatientDataQuery($id:String!,$appointmentId:String!){
+data:everything(patientEverythingCriteria:{
+patientResourceId :$id,
+appointmentId:$appointmentId,
+nextResultUrl: null,
+cancerResourceTypes:[
+    CANCER_RELATED_SERVICE_REQUEST
+]
+})
+{
+ nextResultUrl,
+ recordCount,
+    
+ refferedTo
+ {
+     resourceId,
+     note,
+     patientInstruction,
+     requester
+    {
+        resourceId,
+        resourceType,
+        resourceReference,
+        display
+    },
+    code
+   {
+      codeableSystem,
+      code,
+      text,
+      display
+    },
+ }
+ 
+}
+}`;
+
+export const GET_PATIENT_DETAILS = `
+query
+PatientDataQuery($id:String!){
+data:everything(patientEverythingCriteria:{
+patientResourceId :$id,
+nextResultUrl: null,
+cancerResourceTypes:[
+CANCER_PATIENT,
+CANCER_RELATED_ENCOUNTER_OPD
+]
+})
+{
+ nextResultUrl,
+ recordCount
+ patient
+ {
+   resourceId,
+   nQPatientId,
+   active,
+   gender,
+   display,
+   first,
+   middle,
+   birthDate,
+   occupation,
+   bloodGroup,
+   height
+   {
+       value,
+       unit
+   },
+   weight
+   {
+       value,
+       unit
+   },
+   image,
+   contentType,
+   last,
+   email,
+   age,
+   phone,
+   maritalStatus
+   {
+       code,
+       display,
+       text
+   },
+   addressDetail{
+        line,
+        city,
+        state,
+        district,
+        addressType,
+        postalCode
+   }
+   homePhone,
+   workPhone,
+   insuranceName,
+   referredByName,
+   referredByContactNumber,
+   policyNumber,
+   providerName,
+   bMI
+   {
+       value,
+       unit
+   },
+    bSA
+   {
+       value,
+       unit
+   },
+   idealBodyWeight
+   {
+       value,
+       unit
+   },
+ },
+ cancerEncounterOPDs
+    {
+        resourceId
+    },
+ 
+}
+}`;
+
+export const GET_NOTIFICATION_DETAILS = (
+    url,
+    limit,
+    resourceId
+    ) =>`
+query
+PatientDataQuery{
+data:communicationSearch(communicationSearchCriteria:{
+nextResultUrl:${JSON.stringify(url)},                                       
+sortOrder:"",
+limit:${JSON.stringify(limit)},
+status:"",
+fromDate:null,
+toDate:null,
+practitionerId:${JSON.stringify(resourceId)},
+patientId:null
+})
+{
+recordCount,
+nextResultUrl,
+communications
+{
+communication
+{
+resourceId,
+appointment
+{
+    resourceId,
+    resourceType,
+    display,
+    resourceReference
+}
+status,
+cancerPatientResourceReference
+{
+    resourceId,
+    resourceType,
+    display,
+    resourceReference
+}
+sent,
+categoryType
+newsId
+received,
+priority,
+note,
+payLoad
+{
+contentString,
+}
+}
+}
+}
+}`;

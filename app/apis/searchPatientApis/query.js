@@ -1,0 +1,120 @@
+export const GET_SEARCH_PATIENT = (
+  url,
+  limit,
+  search,
+  value,
+  ageValue0,
+  ageValue1,
+  gValue,
+  ecogValue,
+  activeScore,
+  activeStage,
+  activeFilter,
+  activeType,
+) => `
+query
+PatientDataQuery{
+ data:search(patientSearchCriteria:{
+nextResultUrl:${JSON.stringify(url)},
+sortOrder:"",
+cancerStage:${JSON.stringify(activeStage)},
+patientType:${JSON.stringify(activeType)},
+cancerType:${JSON.stringify(activeFilter)},
+eCOG:${JSON.stringify(activeScore)},
+karnofsky:${ecogValue},
+limit:${JSON.stringify(limit)},
+fromDate:"",
+toDate:"",
+additionalParams:[
+    {
+        patientSearchParamType:${JSON.stringify(search)},
+        patientSearchParamValue:${JSON.stringify(value)},
+    },
+    {
+      patientSearchParamType:"NAME",
+      patientSearchParamValue:${JSON.stringify(value)},
+    },
+    {
+      patientSearchParamType:"PHONE",
+      patientSearchParamValue:${JSON.stringify(value)},
+    },
+    {
+        patientSearchParamType:"AgeLessThan",
+        patientSearchParamValue:${ageValue1}
+    },
+     {
+        patientSearchParamType:"AgeGreaterThan",
+        patientSearchParamValue:${ageValue0}
+    },
+    {
+        patientSearchParamType:"Gender",
+        patientSearchParamValue:${JSON.stringify(gValue)}
+    }
+ ]
+})
+ {  
+     recordCount,
+     nextResultUrl,
+     cancerPatients
+     {
+        patient
+        {
+            first,
+            last,
+            middle,
+            phone,
+            gender,
+            age,
+            display,
+            resourceId,
+            address,
+            image
+        },
+        primaryCancerCondition
+        {
+            resourceId,
+            onset,
+            code
+            {
+                codeableSystem,
+                code,
+                text,
+                display
+            },
+            bodySideWithLaterality
+            {
+             bodySite
+            {
+                codeableSystem,
+                code,
+                text,
+                display
+            },
+             laterality
+            {
+                codeableSystem,
+                code,
+                text,
+                display
+            }
+            },
+            asserter
+            {
+               resourceId,
+               resourceType,
+               resourceReference,
+               display
+            },
+            histologyMorphologyBehaviour
+            {
+                codeableSystem,
+                code,
+                text,
+                display
+            }
+        }
+     }
+  
+ }
+}
+`;

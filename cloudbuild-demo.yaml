@@ -1,0 +1,17 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'gcr.io/oncoquent-dev-297911/github.com/dataquent/nuqare-web-app:$SHORT_SHA',  '-f', 'Dockerfile.demo' , '.' ]
+  timeout: 900s
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/oncoquent-dev-297911/github.com/dataquent/nuqare-web-app:$SHORT_SHA']
+- name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+  - run
+  - --filename=kubeconfig-demo.yaml
+  - --image=gcr.io/oncoquent-dev-297911/github.com/dataquent/nuqare-web-app:$SHORT_SHA
+  - --location=asia-south1-b
+  - --cluster=nuqare-non-prod
+  - --namespace=demo
+timeout: 1200s
+options:
+  machineType: 'N1_HIGHCPU_8'
